@@ -9,6 +9,8 @@ class Formulario extends Model
 {
     use HasFactory;
 
+    protected $table = 'formulario';
+
     protected $fillable = [
         'user_id',
         'type',

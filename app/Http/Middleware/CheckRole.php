@@ -22,7 +22,7 @@ class CheckRole
     
         $user = Auth::user();
     
-        if (!in_array($user->role, $roles)) {
+        if (!in_array($user->rol, $roles)) {
             return redirect()->back()->with('error', 'No tienes permiso para acceder a esta sección');
         }
     

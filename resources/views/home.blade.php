@@ -1,3 +1,5 @@
+<!-- resources/views/home.blade.php -->
+
 @extends('layouts.app')
 
 @section('content')
@@ -14,9 +16,7 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
-
-                    <h2>Lista de usuarios</h2>
+                    <h2>Lista de Usuarios</h2>
                     <table class="table">
                         <thead>
                             <tr>
@@ -37,17 +37,11 @@
                     </table>
 
                     <!-- Nueva sección para los formularios -->
-                    <div class="formularios">
-                        <h1>Formularios</h1>
-                        @if (auth()->user()->rol == 'Admin' || auth()->user()->rol == 'infra')
-                            @include('formularios.formulario_infra')
-                        @endif
-                        @if (auth()->user()->rol == 'Admin' || auth()->user()->rol == 'soporte')
-                            @include('formularios.formulario_soporte')
-                        @endif
-                        @if (auth()->user()->rol == 'Admin')
-                            @include('formularios.formulario_admin')
-                        @endif
+                    <div class="mt-4">
+                        <h2>Formularios</h2>
+                        
+                            <a href="{{ route('formularios.index') }}" class="btn btn-primary">Acceder a los formularios</a>
+                        
                     </div>
 
                 </div>

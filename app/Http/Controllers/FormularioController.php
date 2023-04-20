@@ -10,14 +10,24 @@ class FormularioController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
+    public function index(){
+        return view('formularios.index');
     }
 
     /**
      * Show the form for creating a new resource.
      */
+
+     public function infra()
+    {
+        return view('formularios.infra');
+    }
+
+    public function soporte()
+    {
+        return view('formularios.soporte');
+    }
+    
     public function create()
     {
         //
