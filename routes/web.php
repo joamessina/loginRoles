@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FormularioController;
+use App\Http\Controllers\FormularioNuevoController;
+use App\Http\Controllers\FormularioHabilitadoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +35,16 @@ Route::middleware(['auth', 'checkRole:Admin,infra,soporte'])->group(function () 
     Route::get('/formularios/infra', [FormularioController::class, 'infra'])->name('formularios.infra');
     Route::get('/formularios/soporte', [FormularioController::class, 'soporte'])->name('formularios.soporte');
     Route::get('/formularios/admin', [FormularioController::class, 'admin'])->name('formularios.admin');
-    Route::get('/formularios', [FormularioController::class, 'index'])->name('formularios.index');
+    Route::get('/formularios', [FormularioNuevoController::class, 'index'])->name('formularios.index');
     
+
+    Route::get('/formularios/formulario_nuevo', [FormularioNuevoController::class, 'create'])->name('formularios.formulario_nuevo');
+    Route::post('/formularios/formulario_nuevo', [FormularioNuevoController::class, 'store'])->name('formulario_nuevo.store');
+    Route::delete('/formularios/formulario_nuevo/{id_formulario}', [FormularioNuevoController::class, 'destroy'])->name('formulario_nuevo.destroy');
+    Route::get('/formularios/{id}', [FormularioNuevoController::class, 'show'])->name('formularios.show');
+
+
+    Route::put('/dashboard/formularios/{id}/toggle', [FormularioHabilitadoController::class, 'update'])->name('dashboard.formularios.toggle');
+    Route::get('/dashboard/formularios', [FormularioHabilitadoController::class, 'index'])->name('dashboard.formularios');
+
 });

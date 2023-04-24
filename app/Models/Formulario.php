@@ -9,7 +9,7 @@ class Formulario extends Model
 {
     use HasFactory;
 
-    protected $table = 'formulario';
+    protected $table = 'usuario_formulario';
 
     protected $fillable = [
         'user_id',
