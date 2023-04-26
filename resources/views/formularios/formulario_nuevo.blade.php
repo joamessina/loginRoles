@@ -27,10 +27,4 @@
 </div>
 @endsection
 
-<script>
-    document.querySelector('form').addEventListener('submit', function(event) {
-        const nombre = document.getElementById('nombre').value;
-        document.getElementById('nombre_formulario_hidden').value = nombre;
-    });
-</script>
 

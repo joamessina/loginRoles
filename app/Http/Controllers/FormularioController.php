@@ -28,6 +28,11 @@ class FormularioController extends Controller
         return view('formularios.soporte');
     }
     
+    public function cronos()
+    {
+        return view('formularios.Cronos');
+    }
+
     public function create()
     {
         //
@@ -70,7 +75,7 @@ public function storeSoporte(Request $request)
     return redirect()->route('dashboard')->with('status', 'Formulario Soporte enviado exitosamente.');
 }
 
-public function storeAdmin(Request $request)
+public function storeCronos(Request $request)
 {
     // Código para almacenar la información del formulario Admin
     $data = $request->validate([
@@ -84,7 +89,7 @@ public function storeAdmin(Request $request)
     $formulario->data = $data['data3'];
     $formulario->save();
 
-    return redirect()->route('dashboard')->with('status', 'Formulario Admin enviado exitosamente.');
+    return redirect()->route('dashboard')->with('status', 'Formulario Cronos enviado exitosamente.');
 }
 
     /**

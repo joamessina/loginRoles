@@ -14,21 +14,29 @@
 
     <div class="row">
         @foreach ($formularios as $formulario)
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-header">
-                        {{ $formulario->nombre }}
-                    </div>
-                    <div class="card-body">
-                        <a href="{{ route('formularios.show', $formulario->id_formulario) }}" class="btn btn-primary">Acceder al formulario</a>
-                        <form action="{{ route('formulario_nuevo.destroy', $formulario->id_formulario) }}" method="POST" class="d-inline">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Eliminar</button>
-                        </form>
+            @php
+                $userFormulario = \App\Models\UserFormulario::where('user_id', auth()->user()->id)->where('formulario_id', $formulario->id_formulario)->first();
+                $habilitado = $userFormulario ? $userFormulario->habilitado : false;
+            @endphp
+            @if ($habilitado)
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            {{ $formulario->nombre }}
+                            @if(auth()->user()->rol === 'Admin')
+                                <form action="{{ route('formulario_nuevo.destroy', $formulario->id_formulario) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                </form>
+                            @endif
+                        </div>
+                        <div class="card-body">
+                            <a href="{{ route('formularios.show', $formulario->id_formulario) }}" class="btn btn-primary">Acceder al formulario</a>
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endif
         @endforeach
     </div>
 </div>
