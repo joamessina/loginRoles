@@ -3,20 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Cronos;
+use App\Models\Clima;
 use App\Models\Formulario;
 
 class FormularioController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index(){
-        //return view('formularios.index');
+        return view('formularios.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
 
      public function infra()
     {
@@ -33,94 +31,68 @@ class FormularioController extends Controller
         return view('formularios.Cronos');
     }
 
-    public function create()
+    public function clima()
     {
-        //
+        return view('formularios.Clima');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function storeInfra(Request $request)
-{
-    // Código para almacenar la información del formulario Infra
-    $data = $request->validate([
-        'type' => 'required|string',
-        'data1' => 'sometimes|required|string',
-    ]);
+    public function proAgro(){
+        return view('formularios.pro_agro');
+    }
 
-    $formulario = new Formulario();
-    $formulario->user_id = auth()->user()->id;
-    $formulario->type = $data['type'];
-    $formulario->data = $data['data1'];
-    $formulario->save();
+    public function storeInfra(Request $request){
+        // Código para almacenar la información del formulario Infra
+        $data = $request->validate([
+            'type' => 'required|string',
+            'data1' => 'sometimes|required|string',
+        ]);
 
-    return redirect()->route('dashboard')->with('status', 'Formulario Infra enviado exitosamente.');
-}
+        $formulario = new Clima();
+        $formulario->user_id = auth()->user()->id;
+        $formulario->type = $data['type'];
+        $formulario->data = $data['data1'];
+        $formulario->save();
 
-public function storeSoporte(Request $request)
-{
-    // Código para almacenar la información del formulario Soporte
-    $data = $request->validate([
-        'type' => 'required|string',
-        'data2' => 'sometimes|required|string',
-    ]);
+        return redirect()->route('dashboard')->with('status', 'Formulario Infra enviado exitosamente.');
+    }
 
-    $formulario = new Formulario();
-    $formulario->user_id = auth()->user()->id;
-    $formulario->type = $data['type'];
-    $formulario->data = $data['data2'];
-    $formulario->save();
+    public function storeCronos(Request $request){
+        // Código para almacenar la información del formulario Admin
+        $data = $request->validate([
+            'type' => 'required|string',
+            'data3' => 'sometimes|required|string',
+        ]);
 
-    return redirect()->route('dashboard')->with('status', 'Formulario Soporte enviado exitosamente.');
-}
+        $formulario = new Cronos();
+        $formulario->user_id = auth()->user()->id;
+        $formulario->type = $data['type'];
+        $formulario->data = $data['data3'];
+        $formulario->save();
 
-public function storeCronos(Request $request)
-{
-    // Código para almacenar la información del formulario Admin
-    $data = $request->validate([
-        'type' => 'required|string',
-        'data3' => 'sometimes|required|string',
-    ]);
+        return redirect()->route('dashboard')->with('status', 'Formulario Cronos enviado exitosamente.');
+    }
 
-    $formulario = new Formulario();
-    $formulario->user_id = auth()->user()->id;
-    $formulario->type = $data['type'];
-    $formulario->data = $data['data3'];
-    $formulario->save();
+    public function storeSoporte(Request $request){
+        // Código para almacenar la información del formulario Soporte
+        $data = $request->validate([
+            'type' => 'required|string',
+            'data2' => 'sometimes|required|string',
+        ]);
 
-    return redirect()->route('dashboard')->with('status', 'Formulario Cronos enviado exitosamente.');
-}
+        $formulario = new Formulario();
+        $formulario->user_id = auth()->user()->id;
+        $formulario->type = $data['type'];
+        $formulario->data = $data['data2'];
+        $formulario->save();
+
+        return redirect()->route('dashboard')->with('status', 'Formulario Soporte enviado exitosamente.');
+    }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
+    public function show(string $id){
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

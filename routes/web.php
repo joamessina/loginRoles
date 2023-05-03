@@ -37,6 +37,8 @@ Route::middleware(['auth', 'checkRole:Admin,infra,soporte'])->group(function () 
     Route::get('/formularios/infra', [FormularioController::class, 'infra'])->name('formularios.infra');
     Route::get('/formularios/soporte', [FormularioController::class, 'soporte'])->name('formularios.soporte');
     Route::get('/formularios/Cronos', [FormularioController::class, 'cronos'])->name('formularios.Cronos');
+    Route::get('/formularios/Clima', [FormularioController::class, 'clima'])->name('formularios.Clima');
+    Route::get('/formularios/pro_agro', [FormularioController::class, 'proAgro'])->name('formularios.pro_agro');
     Route::get('/formularios', [FormularioNuevoController::class, 'index'])->name('formularios.index');
     
 

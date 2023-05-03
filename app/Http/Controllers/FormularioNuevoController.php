@@ -39,9 +39,12 @@ class FormularioNuevoController extends Controller
         $formulario = new FormularioNuevo();
 
         // Asignar los datos del formulario a los atributos del modelo
-        
-        $formulario->nombre = $request->input('nombre');
-        $formulario->nombre_formulario = $request->input('nombre');
+        //logica para qeu lo que entre de nombre sea todo en minuscula
+        $nombre = $request->input('nombre');
+        $nombre_formulario = str_replace(' ', '_', $nombre); // Reemplazar espacios por guiones bajos
+    
+        $formulario->nombre =$nombre;
+        $formulario->nombre_formulario = $nombre_formulario;
         $formulario->save();
         // Redirigir al usuario a la vista de éxito o al listado de formularios
         return redirect()->route('formularios.index')->with('success', 'Formulario creado exitosamente.');
@@ -55,21 +58,6 @@ class FormularioNuevoController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.

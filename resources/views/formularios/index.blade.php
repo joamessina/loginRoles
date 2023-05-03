@@ -32,7 +32,7 @@
                             @endif
                         </div>
                         <div class="card-body">
-                            <a href="{{ route('formularios.show', $formulario->id_formulario) }}" class="btn btn-primary">Acceder al formulario</a>
+                            <a href="{{ route('formularios.show', $formulario->nombre_formulario) }}" class="btn btn-primary">Acceder al formulario</a>
                         </div>
                     </div>
                 </div>
