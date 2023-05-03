@@ -8,7 +8,9 @@
     <!-- Nueva sección para agregar formularios -->
     <div class="row mb-4">
         <div class="col-md-12">
-            <a href="{{ route('formularios.formulario_nuevo') }}" class="btn btn-success">Agregar nuevo formulario</a>
+            @if(auth()->user()->rol === 'Admin')
+                <a href="{{ route('formularios.formulario_nuevo') }}" class="btn btn-success">Agregar nuevo formulario</a>
+            @endif
         </div>
     </div>
 

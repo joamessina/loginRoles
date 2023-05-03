@@ -41,7 +41,8 @@ class FormularioNuevoController extends Controller
         // Asignar los datos del formulario a los atributos del modelo
         //logica para qeu lo que entre de nombre sea todo en minuscula
         $nombre = $request->input('nombre');
-        $nombre_formulario = str_replace(' ', '_', $nombre); // Reemplazar espacios por guiones bajos
+        $nombreminusculas = strtolower($nombre); // Convertir el nombre a minúsculas
+        $nombre_formulario = str_replace(' ', '_', $nombreminusculas); // Reemplazar espacios por guiones bajos
     
         $formulario->nombre =$nombre;
         $formulario->nombre_formulario = $nombre_formulario;
