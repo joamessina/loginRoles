@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\FormularioNuevo;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
+
 
 class FormularioNuevoController extends Controller
 {
@@ -11,10 +14,12 @@ class FormularioNuevoController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $formularios = FormularioNuevo::where('habilitado', 1)->get();
-        return view('formularios.index', compact('formularios'));
-    }
+{
+    //dd('Index function');
+    $formularios = FormularioNuevo::where('habilitado', 1)->get();
+    return view('formularios.index', compact('formularios'));
+}
+
 
     /**
      * Show the form for creating a new resource.
@@ -54,10 +59,36 @@ class FormularioNuevoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+
+    public function show($nombre_formulario)
     {
-        //
+        //Log::info('Show function', ['nombre_formulario' => $nombre_formulario]);
+    
+        $ruta_base = resource_path('views');
+        $archivos_blade = glob($ruta_base . '/**/*_form.blade.php', GLOB_BRACE);
+    
+        $ruta_vista = null;
+    
+        foreach ($archivos_blade as $archivo) {
+            $archivo = str_replace($ruta_base . '/', '', $archivo);
+            $archivo = str_replace('.blade.php', '', $archivo);
+            $archivo = str_replace('/', '.', $archivo);
+    
+            if (strpos($archivo, $nombre_formulario) !== false) {
+                $ruta_vista = $archivo;
+                break;
+            }
+        }
+    
+        if ($ruta_vista === null) {
+            abort(404, "Formulario no encontrado");
+        }
+    
+        return view($ruta_vista);
     }
+    
+
+    
 
 
     /**

@@ -1,1 +1,0 @@
-//aca va el codigo script de la pagina

@@ -34,8 +34,7 @@
                             @endif
                         </div>
                         <div class="card-body">
-                            <a href="{{ route('formularios.show', $formulario->nombre_formulario) }}" class="btn btn-primary">Acceder al formulario</a>
-                        </div>
+                        <a href="{{ route('formularios.show', $formulario->nombre_formulario) }}" class="btn btn-primary">Acceder al formulario</a>                        </div>
                     </div>
                 </div>
             @endif
