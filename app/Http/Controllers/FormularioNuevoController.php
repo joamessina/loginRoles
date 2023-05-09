@@ -38,6 +38,7 @@ class FormularioNuevoController extends Controller
         // Validación de datos (ajusta los campos según necesites)
         $request->validate([
             'nombre' => 'required|string|max:255',
+            'link' => 'required|string|max:255',
         ]);
 
         // Crear una nueva instancia del modelo Formulario
@@ -51,6 +52,11 @@ class FormularioNuevoController extends Controller
     
         $formulario->nombre =$nombre;
         $formulario->nombre_formulario = $nombre_formulario;
+
+        $link = $request->input('link');
+        if (!empty($link) && preg_match('/(http|https|www)/', $link)) {
+            $formulario->enlace = $link;
+        }
         $formulario->save();
         // Redirigir al usuario a la vista de éxito o al listado de formularios
         return redirect()->route('formularios.index')->with('success', 'Formulario creado exitosamente.');

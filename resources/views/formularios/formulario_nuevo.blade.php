@@ -16,6 +16,12 @@
                             <input type="text" name="nombre" id="nombre" class="form-control" required>
                         </div>
 
+                        <div class="form-group">
+                            <label for="link">Enlace del formulario (opcional):</label>
+                            <input type="text" name="link" id="link" class="form-control">
+                        </div>
+
+
                         <input type="hidden" name="nombre_formulario_hidden" id="nombre_formulario_hidden">
 
                         <button type="submit" class="btn btn-primary">Crear formulario</button>

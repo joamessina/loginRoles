@@ -1,5 +1,3 @@
-<!-- resources/views/formularios/index.blade.php -->
-
 @extends('layouts.app')
 
 @section('content')
@@ -34,7 +32,11 @@
                             @endif
                         </div>
                         <div class="card-body">
-                        <a href="{{ route('formularios.show', $formulario->nombre_formulario) }}" class="btn btn-primary">Acceder al formulario</a>                        </div>
+                            @php
+                                $ruta = $formulario->enlace ? $formulario->enlace : route('formularios.show', $formulario->nombre_formulario);
+                            @endphp
+                            <a href="{{ $ruta }}" class="btn btn-primary">Acceder al formulario</a>
+                        </div>
                     </div>
                 </div>
             @endif
