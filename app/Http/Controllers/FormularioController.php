@@ -8,6 +8,7 @@ use App\Models\Clima;
 use App\Models\Formulario;
 use App\Models\FormularioPrensa;
 use App\Models\FormularioPronos;
+use App\Models\AvisoPrensa;
 
 class FormularioController extends Controller
 {
@@ -82,7 +83,6 @@ class FormularioController extends Controller
         ]);
         
         $formulario = new FormularioPrensa();
-        $formulario->setConnection('mysql2');
         $formulario->user_id = auth()->user()->id;
         $formulario->comunicadoDia = $data['comunicadoDia'];
         $formulario->comunicadoNro = $data['comunicadoNro'];
@@ -90,7 +90,14 @@ class FormularioController extends Controller
         $formulario->contenido = $data['contenido'];
         $formulario->type = $data['type'];
         $formulario->save();
-    
+        
+        // Guardar datos en la tabla avisos de la base de datos avisos_prensa
+        $aviso = new AvisoPrensa();
+        $aviso->comunicadoDia = $data['comunicadoDia'];
+        $aviso->comunicadoNro = $data['comunicadoNro'];
+        $aviso->titulo = $data['titulo'];
+        $aviso->contenido = $data['contenido'];
+        $aviso->save();
 
         return redirect()->route('formularios.index')->with('status', 'Formulario Soporte enviado exitosamente.');
     }
