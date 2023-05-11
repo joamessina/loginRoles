@@ -16,7 +16,8 @@ class FormularioNuevo extends Model
         'nombre',
         'habilitado',
         'nombre_formulario',
-        'enlace'
+        'enlace',
+        'descripcion',
         
     ];
 

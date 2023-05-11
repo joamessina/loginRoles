@@ -29,9 +29,11 @@
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
                                 </form>
+                                <a href="{{ route('formularios.edit', $formulario->id_formulario) }}" class="btn btn-warning btn-sm">Actualizar</a>
                             @endif
                         </div>
                         <div class="card-body">
+                            <p>{{ $formulario->descripcion }}</p> <!-- Nueva línea para mostrar la descripción -->    
                             @php
                                 $ruta = $formulario->enlace ? $formulario->enlace : route('formularios.show', $formulario->nombre_formulario);
                             @endphp

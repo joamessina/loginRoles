@@ -38,7 +38,7 @@ class FormularioNuevoController extends Controller
         // Validación de datos (ajusta los campos según necesites)
         $request->validate([
             'nombre' => 'required|string|max:255',
-            'link' => 'required|string|max:255',
+            'descripcion'=>'required|string|max:255',
         ]);
 
         // Crear una nueva instancia del modelo Formulario
@@ -52,6 +52,7 @@ class FormularioNuevoController extends Controller
     
         $formulario->nombre =$nombre;
         $formulario->nombre_formulario = $nombre_formulario;
+        $formulario->descripcion = $request->input('descripcion'); // Nueva línea para guardar la descripción
 
         $link = $request->input('link');
         if (!empty($link) && preg_match('/(http|https|www)/', $link)) {
@@ -107,4 +108,39 @@ class FormularioNuevoController extends Controller
 
     return redirect()->route('formularios.index')->with('success', 'Formulario eliminado con éxito');
     }
+
+    public function edit($id)
+{
+    $formulario = FormularioNuevo::find($id);
+    return view('formularios.edit', compact('formulario'));
+}
+
+public function update(Request $request, $id)
+{
+    $request->validate([
+        'nombre' => 'required|string|max:255',
+        'descripcion' => 'required|string|max:1000',
+        'link' => 'nullable|url',
+    ]);
+
+    $formulario = FormularioNuevo::find($id);
+
+    $nombre = $request->input('nombre');
+    $nombreminusculas = strtolower($nombre);
+    $nombre_formulario = str_replace(' ', '_', $nombreminusculas);
+
+    $formulario->nombre = $nombre;
+    $formulario->nombre_formulario = $nombre_formulario;
+    $formulario->descripcion = $request->input('descripcion');
+
+    $link = $request->input('link');
+    if (!empty($link) && preg_match('/(http|https|www)/', $link)) {
+        $formulario->enlace = $link;
+    }
+
+    $formulario->save();
+
+    return redirect()->route('formularios.index')->with('success', 'Formulario actualizado exitosamente.');
+}
+
 }

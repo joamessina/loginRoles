@@ -21,6 +21,11 @@
                             <input type="text" name="link" id="link" class="form-control">
                         </div>
 
+                        <div class="form-group">
+                            <label for="descripcion">Descripción del formulario:</label>
+                            <textarea name="descripcion" id="descripcion" class="form-control" required></textarea>
+                        </div>
+
 
                         <input type="hidden" name="nombre_formulario_hidden" id="nombre_formulario_hidden">
 

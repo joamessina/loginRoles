@@ -40,11 +40,13 @@ Route::middleware(['auth', 'checkRole:Admin,infra,soporte'])->group(function () 
     // Route::get('/formularios/soporte', [FormularioController::class, 'soporte'])->name('formularios.soporte');
     // Route::get('/formularios/Cronos', [FormularioController::class, 'cronos'])->name('formularios.Cronos');
     // Route::get('/formularios/Clima', [FormularioController::class, 'clima'])->name('formularios.Clima');
-
     //Route::get('/formularioPrensa/prensa_form', [FormularioController::class, 'prensaForm'])->name('formularioPrensa.prensa_form');
+    
     Route::get('/formularioPronos/pronos_form', [FormularioController::class, 'pronosForm'])->name('formularioPronos.pronos_form');
     Route::get('/formularios', [FormularioNuevoController::class, 'index'])->name('formularios.index');
-    
+
+    Route::get('/formularios/{id}/edit', [FormularioNuevoController::class, 'edit'])->name('formularios.edit');
+    Route::put('/formularios/{id}/update', [FormularioNuevoController::class, 'update'])->name('formularios.update');
 
     Route::get('/formularios/formulario_nuevo', [FormularioNuevoController::class, 'create'])->name('formularios.formulario_nuevo');
     Route::post('/formularios/formulario_nuevo', [FormularioNuevoController::class, 'store'])->name('formulario_nuevo.store');
