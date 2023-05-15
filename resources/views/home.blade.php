@@ -17,12 +17,17 @@
                     @endif
 
                     <h2>Lista de Usuarios</h2>
+                    
                     <table class="table">
                         <thead>
                             <tr>
                                 <th>Nombre</th>
                                 <th>Email</th>
                                 <th>Rol</th>
+                                @if(auth()->user()->rol === 'Admin')
+                                    <th>Editar</th>
+                                    <th>Eliminar</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -31,19 +36,26 @@
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->rol }}</td>
+                                    <td>
+                                        <!-- Botón de editar solo visible para el rol 'Admin' -->
+                                        @if(auth()->user()->rol === 'Admin')
+                                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning btn-sm">Editar</a>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <!-- Botón de eliminar solo visible para el rol 'Admin' -->
+                                        @if(auth()->user()->rol === 'Admin')
+                                            <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                            </form>
+                                        @endif
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
-
-                    <!-- Nueva sección para los formularios -->
-                    <div class="mt-4">
-                        <h2>Formularios</h2>
-                        
-                            <a href="{{ route('formularios.index') }}" class="btn btn-primary">Acceder a los formularios</a>
-                        
-                    </div>
-
                 </div>
             </div>
         </div>

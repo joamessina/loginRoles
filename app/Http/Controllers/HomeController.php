@@ -25,19 +25,22 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
-        $user = auth()->user();
-        $role = $user->rol;
-        Log::info('Role del usuario actual: ' . $role);
-    
-        if ($role == 'Admin') {
-            $users = User::all(); // El Admin ve todos los usuarios
-        } else {
-            $users = User::where('rol', $role)->get(); // Infra y Soporte ven solo usuarios con su mismo rol
-        }
-    
-        Log::info('Usuarios obtenidos: ' . json_encode($users));
-    
-        return view('home', compact('users'));
+{
+    $user = auth()->user();
+    $role = $user->role->rol; // Cambio aquí
+    Log::info('Role del usuario actual: ' . $role);
+
+    if ($role == 'Admin') {
+        $users = User::all(); // El Admin ve todos los usuarios
+    } else {
+        $users = User::whereHas('role', function ($query) use ($role) { // Cambio aquí
+            $query->where('rol', $role);
+        })->get();
     }
+
+    Log::info('Usuarios obtenidos: ' . json_encode($users));
+
+    return view('home', compact('users'));
+}
+
 }

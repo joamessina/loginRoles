@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container">
-    <h1>Formularios y Usuarios</h1>
+    <h1>Asignacion de Formularios</h1>
     <table class="table">
         <thead>
             <tr>

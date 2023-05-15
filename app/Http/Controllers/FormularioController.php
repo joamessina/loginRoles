@@ -15,11 +15,7 @@ class FormularioController extends Controller
 
     public function index(){
         return view('formularios.index');
-    }
-
-
-
-    
+    }    
     public function storeInfra(Request $request){
         // Código para almacenar la información del formulario Infra
         $data = $request->validate([

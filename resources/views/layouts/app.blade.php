@@ -43,18 +43,21 @@
                                 </li>
                             @endif
 
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
+                            
                         @else
                             @if (Auth::user()->rol == 'Admin')
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ url('/dashboard/formularios_usuarios') }}">Formularios Usuarios</a>
+                                    <a class="nav-link" href="{{ url('/dashboard/formularios_usuarios') }}">Asignacion de Formularios</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ url('/dashboard/formularios') }}">Formularios</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('/dashboard') }}">Listado de Usuarios</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" href="{{ route('users.create') }}">Crear nuevo usuario</a>
                                 </li>
                             @endif
                             <li class="nav-item dropdown">

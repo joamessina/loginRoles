@@ -10,7 +10,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $role = auth()->user()->role;
+        $role = auth()->user()->role->rol;
         return view('dashboard', compact('role'));
     }
 
@@ -24,5 +24,4 @@ class DashboardController extends Controller
             'formularios' => $formularios,
         ]);
     }
-
 }
